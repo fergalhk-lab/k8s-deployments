@@ -134,6 +134,9 @@ metadata:
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: "v3.3.1"
 type: Opaque
+# Setting a blank data again will wipe admin password/key/cert
+data:
+  webhook.github.secret: JGFyZ29jZC1naXRodWItd2ViaG9vazpzZWNyZXQ=
 ---
 # Source: argo-cd/templates/argocd-configs/argocd-cm.yaml
 apiVersion: v1
@@ -33952,3 +33955,20 @@ spec:
       metadata:
         labels:
           argocd.argoproj.io/secret-type: repo-creds
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: argocd-github-webhook
+  namespace: argocd
+spec:
+  data:
+  - remoteRef:
+      key: argocd/webhook-secret
+    secretKey: secret
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: aws-secrets-manager
+  target:
+    name: argocd-github-webhook
