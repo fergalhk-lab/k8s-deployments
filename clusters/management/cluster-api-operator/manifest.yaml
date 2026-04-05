@@ -23564,7 +23564,7 @@ metadata:
 spec:
   version: v1.0.11
 ---
-apiVersion: external-secrets.io/v1
+apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: hetzner-token
