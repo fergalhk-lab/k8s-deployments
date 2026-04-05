@@ -162,8 +162,8 @@ data:
         id: github
         name: GitHub
         config:
-          clientID: $argocd-github-sso:client_id
-          clientSecret: $argocd-github-sso:client_secret
+          clientID: $sso:clientID
+          clientSecret: $sso:clientSecret
           redirectURI: https://argocd.fergal.website/api/dex/callback
           orgs:
             - name: fergalhk-lab
@@ -356,9 +356,8 @@ metadata:
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: "v3.3.1"
 data:
-  policy.csv: |
-    g, fergalhk-lab, role:admin
-  policy.default: ""
+  policy.csv: ""
+  policy.default: role:admin
   policy.matchMode: glob
   scopes: '[groups]'
 ---
@@ -32232,7 +32231,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: 2e3fb7ef55d5e7bced1fa7e049bf7d1082911005d78f768568356cb9ccb79806
-        checksum/cm: 821e2ceb1af31de2d9bc8c2daff7f5d66df7d691c52a00d7d5f3888bbc6933fc
+        checksum/cm: 3a3b12cb18202a53caf3ba892a5fef88d22e40565136d67217c31b9c4b8ba347
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-repo-server
@@ -32667,7 +32666,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: 2e3fb7ef55d5e7bced1fa7e049bf7d1082911005d78f768568356cb9ccb79806
-        checksum/cm: 821e2ceb1af31de2d9bc8c2daff7f5d66df7d691c52a00d7d5f3888bbc6933fc
+        checksum/cm: 3a3b12cb18202a53caf3ba892a5fef88d22e40565136d67217c31b9c4b8ba347
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-server
@@ -33134,7 +33133,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: 2e3fb7ef55d5e7bced1fa7e049bf7d1082911005d78f768568356cb9ccb79806
-        checksum/cm: 821e2ceb1af31de2d9bc8c2daff7f5d66df7d691c52a00d7d5f3888bbc6933fc
+        checksum/cm: 3a3b12cb18202a53caf3ba892a5fef88d22e40565136d67217c31b9c4b8ba347
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-dex-server
@@ -33388,7 +33387,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: 2e3fb7ef55d5e7bced1fa7e049bf7d1082911005d78f768568356cb9ccb79806
-        checksum/cm: 821e2ceb1af31de2d9bc8c2daff7f5d66df7d691c52a00d7d5f3888bbc6933fc
+        checksum/cm: 3a3b12cb18202a53caf3ba892a5fef88d22e40565136d67217c31b9c4b8ba347
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-application-controller
@@ -34002,14 +34001,14 @@ spec:
   - remoteRef:
       key: apikeys/github-oauth/argocd
       property: client_id
-    secretKey: client_id
+    secretKey: clientID
   - remoteRef:
       key: apikeys/github-oauth/argocd
       property: client_secret
-    secretKey: client_secret
+    secretKey: clientSecret
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
     name: aws-secrets-manager
   target:
-    name: argocd-github-sso
+    name: sso
