@@ -490,8 +490,8 @@ metadata:
 spec:
   clusterName: hetzner-cluster
   replicas: 3
-  selector:
-    matchLabels: null
+  # selector:
+  #   matchLabels: null
   template:
     metadata:
       labels:
