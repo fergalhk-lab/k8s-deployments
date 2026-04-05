@@ -157,6 +157,11 @@ data:
   application.instanceLabelKey: argocd.argoproj.io/instance
   application.sync.impersonation.enabled: "false"
   exec.enabled: "false"
+  resource.customizations.ignoreDifferences.external-secrets.io_ExternalSecret: |
+    jqPathExpressions:
+      - '.spec.data[].remoteRef.conversionStrategy'
+      - '.spec.data[].remoteRef.decodingStrategy'
+      - '.spec.data[].remoteRef.metadataPolicy'
   resource.customizations.ignoreResourceUpdates.ConfigMap: |
     jqPathExpressions:
       # Ignore the cluster-autoscaler status
@@ -32214,7 +32219,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: a0a9989b15fb3934b1f7e601fce8074d6cf69ba07b1f4dfe6107069cf8872932
-        checksum/cm: e1d9536f9c77fe161cee67506ecc046c50a29245d77620d694eb722076403c08
+        checksum/cm: c0c3d93835c54739efada689c5225bc94a076e6602c20439462dcb62ca092704
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-repo-server
@@ -32649,7 +32654,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: a0a9989b15fb3934b1f7e601fce8074d6cf69ba07b1f4dfe6107069cf8872932
-        checksum/cm: e1d9536f9c77fe161cee67506ecc046c50a29245d77620d694eb722076403c08
+        checksum/cm: c0c3d93835c54739efada689c5225bc94a076e6602c20439462dcb62ca092704
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-server
@@ -33369,7 +33374,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: a0a9989b15fb3934b1f7e601fce8074d6cf69ba07b1f4dfe6107069cf8872932
-        checksum/cm: e1d9536f9c77fe161cee67506ecc046c50a29245d77620d694eb722076403c08
+        checksum/cm: c0c3d93835c54739efada689c5225bc94a076e6602c20439462dcb62ca092704
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-application-controller
