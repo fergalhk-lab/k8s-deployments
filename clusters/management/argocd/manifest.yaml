@@ -31795,6 +31795,8 @@ spec:
             - --metrics-addr=:8080
             - --probe-addr=:8081
             - --webhook-addr=:7000
+            - --status-processors=2
+            - --operation-processors=1
           env:
             - name: NAMESPACE
               valueFrom:
@@ -32096,6 +32098,8 @@ spec:
             - --namespace=argocd
             - --argocd-repo-server=argocd-repo-server:8081
             - --secret-name=argocd-notifications-secret
+            - '--status-processors=2'
+            - '--operation-processors=1'
           env:
             - name: ARGOCD_NOTIFICATIONS_CONTROLLER_LOGLEVEL
               valueFrom:
