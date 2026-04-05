@@ -269,7 +269,7 @@ data:
   statusbadge.enabled: "false"
   timeout.hard.reconciliation: 0s
   timeout.reconciliation: 180s
-  url: https://argocd.management.fergal.website
+  url: https://argocd.fergal.website
 ---
 # Source: argo-cd/templates/argocd-configs/argocd-cmd-params-cm.yaml
 apiVersion: v1
@@ -32232,7 +32232,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: 2e3fb7ef55d5e7bced1fa7e049bf7d1082911005d78f768568356cb9ccb79806
-        checksum/cm: a6ff27fbfa8ad3207f8e473d1ab55ef7afb64b6c09bf0fc6c831a241e68f8cc4
+        checksum/cm: 821e2ceb1af31de2d9bc8c2daff7f5d66df7d691c52a00d7d5f3888bbc6933fc
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-repo-server
@@ -32667,7 +32667,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: 2e3fb7ef55d5e7bced1fa7e049bf7d1082911005d78f768568356cb9ccb79806
-        checksum/cm: a6ff27fbfa8ad3207f8e473d1ab55ef7afb64b6c09bf0fc6c831a241e68f8cc4
+        checksum/cm: 821e2ceb1af31de2d9bc8c2daff7f5d66df7d691c52a00d7d5f3888bbc6933fc
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-server
@@ -33134,7 +33134,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: 2e3fb7ef55d5e7bced1fa7e049bf7d1082911005d78f768568356cb9ccb79806
-        checksum/cm: a6ff27fbfa8ad3207f8e473d1ab55ef7afb64b6c09bf0fc6c831a241e68f8cc4
+        checksum/cm: 821e2ceb1af31de2d9bc8c2daff7f5d66df7d691c52a00d7d5f3888bbc6933fc
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-dex-server
@@ -33388,7 +33388,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: 2e3fb7ef55d5e7bced1fa7e049bf7d1082911005d78f768568356cb9ccb79806
-        checksum/cm: a6ff27fbfa8ad3207f8e473d1ab55ef7afb64b6c09bf0fc6c831a241e68f8cc4
+        checksum/cm: 821e2ceb1af31de2d9bc8c2daff7f5d66df7d691c52a00d7d5f3888bbc6933fc
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-application-controller
