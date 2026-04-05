@@ -153,7 +153,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: "v3.3.1"
 data:
-  admin.enabled: "true"
+  admin.enabled: "false"
   application.instanceLabelKey: argocd.argoproj.io/instance
   application.sync.impersonation.enabled: "false"
   dex.config: |
@@ -32230,7 +32230,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: a0a9989b15fb3934b1f7e601fce8074d6cf69ba07b1f4dfe6107069cf8872932
-        checksum/cm: 60ad4f07e91dd265b70dae9473e393b163d5dd1fb941cf0315fe92e7fccec961
+        checksum/cm: 3a3b12cb18202a53caf3ba892a5fef88d22e40565136d67217c31b9c4b8ba347
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-repo-server
@@ -32665,7 +32665,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: a0a9989b15fb3934b1f7e601fce8074d6cf69ba07b1f4dfe6107069cf8872932
-        checksum/cm: 60ad4f07e91dd265b70dae9473e393b163d5dd1fb941cf0315fe92e7fccec961
+        checksum/cm: 3a3b12cb18202a53caf3ba892a5fef88d22e40565136d67217c31b9c4b8ba347
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-server
@@ -33132,7 +33132,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: a0a9989b15fb3934b1f7e601fce8074d6cf69ba07b1f4dfe6107069cf8872932
-        checksum/cm: 60ad4f07e91dd265b70dae9473e393b163d5dd1fb941cf0315fe92e7fccec961
+        checksum/cm: 3a3b12cb18202a53caf3ba892a5fef88d22e40565136d67217c31b9c4b8ba347
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-dex-server
@@ -33386,7 +33386,7 @@ spec:
     metadata:
       annotations:
         checksum/cmd-params: a0a9989b15fb3934b1f7e601fce8074d6cf69ba07b1f4dfe6107069cf8872932
-        checksum/cm: 60ad4f07e91dd265b70dae9473e393b163d5dd1fb941cf0315fe92e7fccec961
+        checksum/cm: 3a3b12cb18202a53caf3ba892a5fef88d22e40565136d67217c31b9c4b8ba347
       labels:
         helm.sh/chart: argo-cd-9.4.3
         app.kubernetes.io/name: argocd-application-controller
@@ -34011,3 +34011,7 @@ spec:
     name: aws-secrets-manager
   target:
     name: sso
+    template:
+      metadata:
+        labels:
+          app.kubernetes.io/part-of: argocd
