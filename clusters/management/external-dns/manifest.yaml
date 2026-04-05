@@ -281,10 +281,10 @@ spec:
             timeoutSeconds: 5
           resources:
             limits:
-              memory: 32Mi
+              memory: 48Mi
             requests:
               cpu: 10m
-              memory: 32Mi
+              memory: 48Mi
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
