@@ -1,3 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: capi-operator-system
+spec: {}
+status: {}
+---
 ---
 # Source: cluster-api-operator/templates/operator-components.yaml
 apiVersion: v1

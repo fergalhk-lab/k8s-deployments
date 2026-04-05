@@ -1,3 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: external-secrets
+spec: {}
+status: {}
+---
 ---
 # Source: external-secrets/templates/cert-controller-serviceaccount.yaml
 apiVersion: v1
