@@ -33943,7 +33943,7 @@ spec:
         kubernetes.io/os: linux
       serviceAccountName: argocd-redis-secret-init
 ---
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: argocd-github-app-creds
@@ -33979,7 +33979,7 @@ spec:
         labels:
           argocd.argoproj.io/secret-type: repo-creds
 ---
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: argocd-github-webhook
@@ -33996,7 +33996,7 @@ spec:
   target:
     name: argocd-github-webhook
 ---
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: argocd-github-sso
