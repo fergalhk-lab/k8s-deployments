@@ -1,0 +1,138 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: capi-argocd-bootstrapper
+spec: {}
+status: {}
+---
+---
+# Source: capi-argocd-bootstrapper/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: capi-argocd-bootstrapper
+  namespace: capi-argocd-bootstrapper
+---
+# Source: capi-argocd-bootstrapper/templates/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: capi-argocd-bootstrapper
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch"]
+---
+# Source: capi-argocd-bootstrapper/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: capi-argocd-bootstrapper
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: capi-argocd-bootstrapper
+subjects:
+  - kind: ServiceAccount
+    name: capi-argocd-bootstrapper
+    namespace: capi-argocd-bootstrapper
+---
+# Source: capi-argocd-bootstrapper/templates/operator-role.yaml
+# Allows the operator to record Kubernetes events in its own namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: capi-argocd-bootstrapper-operator
+  namespace: capi-argocd-bootstrapper
+rules:
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+  - apiGroups: ["events.k8s.io"]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+---
+# Source: capi-argocd-bootstrapper/templates/role.yaml
+# Grants write access to secrets in the argocd namespace for managing cluster secrets.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: capi-argocd-bootstrapper
+  namespace: argocd
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+# Source: capi-argocd-bootstrapper/templates/operator-rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: capi-argocd-bootstrapper-operator
+  namespace: capi-argocd-bootstrapper
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: capi-argocd-bootstrapper-operator
+subjects:
+  - kind: ServiceAccount
+    name: capi-argocd-bootstrapper
+    namespace: capi-argocd-bootstrapper
+---
+# Source: capi-argocd-bootstrapper/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: capi-argocd-bootstrapper
+  namespace: argocd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: capi-argocd-bootstrapper
+subjects:
+  - kind: ServiceAccount
+    name: capi-argocd-bootstrapper
+    namespace: capi-argocd-bootstrapper
+---
+# Source: capi-argocd-bootstrapper/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capi-argocd-bootstrapper
+  namespace: capi-argocd-bootstrapper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: capi-argocd-bootstrapper
+  template:
+    metadata:
+      labels:
+        app: capi-argocd-bootstrapper
+    spec:
+      serviceAccountName: capi-argocd-bootstrapper
+      containers:
+        - name: bootstrapper
+          image: "740994137039.dkr.ecr.eu-west-1.amazonaws.com/capi-argocd-bootstrapper:8ce566c3b76058e9f5c9e68614d76bb7b2be1ee5"
+          imagePullPolicy: IfNotPresent
+          args:
+            - --argocd-namespace=argocd
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 32Mi
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
